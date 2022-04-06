@@ -4,7 +4,7 @@ Builds on branch demo-01. Introduces modules and input variables.
 
 The module introduced is named `core` and contains configuration for resources that don't change very often. Resources from modules introduced in subsequent steps rely on this module.
 
-You will need to create a file named `terraform.tfvars` in your `terraform directory to follow the steps below.
+You will need to create a file named `terraform.tfvars` in your `terraform` directory.
 
 You also need to create a key pair for your EC2 instances. See the README.md in they `keys` directory for instructions.
 
