@@ -27,12 +27,17 @@ provider "aws" {
   }
 }
 
-# Resources
-resource "aws_vpc" "this" {
-  cidr_block           = "10.0.0.0/16"
-  enable_dns_support   = true
-  enable_dns_hostnames = true
-  tags = {
-    Name = "my_vpc"
-  }
+
+# Modules
+# https://www.terraform.io/language/modules
+module "core" {
+  source          = "./modules/core"
+  project_name    = var.project_name
+  dsc_bucket_name = var.dsc_bucket_name
+  key_path        = var.key_path
+  vpc_cidr        = var.vpc_cidr
+  subnets         = var.subnets
+  pdc_ip          = var.pdc_ip
+  dns_ips         = var.dns_ips
+  management_ips  = var.management_ips
 }

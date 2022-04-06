@@ -1,12 +1,8 @@
-# https://www.terraform.io/language/values/variables
 variable "project_name" {
   default = ""
   description = "Prefix for all resources"
 }
-#-------------------------------------------------------------------------
-# Core Module Variables
-#-------------------------------------------------------------------------
-# VPC
+# VPC Variables
 variable "vpc_cidr" {
   type        = string
   description = "CIDR block for the VPC."
@@ -46,4 +42,9 @@ variable "mof_directory" {
   type        = string
   description = "Path to directory on your build machine that contains required MOF files. Can be absolute or relative to the root module directory."
   default     = ""
+}
+# Data Sources
+# https://www.terraform.io/language/data-sources
+data "aws_availability_zones" "available" {
+  state = "available"
 }
