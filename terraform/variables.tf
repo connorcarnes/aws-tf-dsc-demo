@@ -47,3 +47,18 @@ variable "mof_directory" {
   description = "Path to directory on your build machine that contains required MOF files. Can be absolute or relative to the root module directory."
   default     = ""
 }
+#-------------------------------------------------------------------------
+# Compute Module Variables
+#-------------------------------------------------------------------------
+# EC2
+variable "ec2_data" {
+  description = "Data used to configure ec2 resource. The key will be the ec2 name."
+  type = map(object({
+    associate_public_ip_address = bool
+    instance_type               = string
+    private_ip                  = string
+    az                          = string
+    data_disk_size              = number
+  }))
+  default = {}
+}

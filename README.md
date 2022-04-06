@@ -1,39 +1,26 @@
 # Overview
 
-Builds on branch demo-01. Introduces modules and input variables.
+Builds on branch demo-02. Introduces a second module, and how to pass output from one module as input to another module.
 
-The module introduced is named `core` and contains configuration for resources that don't change very often. Resources from modules introduced in subsequent steps rely on this module.
-
-You will need to create a file named `terraform.tfvars` in your `terraform directory to follow the steps below.
-
-You also need to create a key pair for your EC2 instances. See the README.md in they `keys` directory for instructions.
-
-# Sample terraform.tfvars
+# Addition to terraform.tfvars
 
 ```
-project_name    = "example-project"
-dsc_bucket_name = "my-bucket-name"
-key_path        = ""../keys/yourkey.pub"
-vpc_cidr        = "10.0.0.0/16"
-subnets         = ["10.0.1.0/24", "10.0.2.0/24"]
-pdc_ip          = "10.0.1.10"
-dns_ips         = ["1.1.1.1", "8.8.8.8"]
-management_ips  = ["your-ip-here"] # If you want to RDP to your instances from your workstation
-```
-
-# [Standard Module Structure](https://www.terraform.io/language/modules/develop/structure)
-
-Other files you may commonly see that aren't mentioned in the doc above are `providers.tf`,`versions.tf`,`backend.tf`,`data.tf` and `locals.tf`. You may also see different files for different services, e.g. `vpc.tf` and `s3.tf`.
-
-# [Input Variables](https://www.terraform.io/language/values/variables)
-
-Defining a variable in a module and using it in that same module is straightforward.
-
-To pass a variable from the root module to a child module, both modules must have the variable defined in their `variables.tf` file. The value is passed from the root to the child in a module block:
-
-```
-module "core" {
-  source       = "./modules/core"
-  project_name = var.project_name
+ec2_data = {
+  dc00 = {
+    associate_public_ip_address = true
+    instance_type               = "t2.small"
+    private_ip                  = "10.0.1.10"
+    az                          = "us-east-1a"
+    data_disk_size              = 0
+  },
+  app00 = {
+    associate_public_ip_address = true
+    instance_type               = "t2.small"
+    private_ip                  = "10.0.1.20"
+    az                          = "us-east-1a"
+    data_disk_size              = 1
+  }
 }
 ```
+
+# [Output Values](https://www.terraform.io/language/values/outputs)

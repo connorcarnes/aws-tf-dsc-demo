@@ -41,3 +41,12 @@ module "core" {
   dns_ips         = var.dns_ips
   management_ips  = var.management_ips
 }
+
+module "compute" {
+  source                    = "./modules/compute"
+  key_pair_name             = module.core.key_pair_name
+  vpc_security_group_ids    = [module.core.sg_id]
+  first_subnet_id           = module.core.first_subnet_id
+  ssm_instance_profile_name = module.core.ssm_instance_profile_name
+  ec2_data                  = var.ec2_data
+}
