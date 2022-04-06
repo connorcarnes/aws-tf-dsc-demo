@@ -1,0 +1,71 @@
+---
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'MANUAL DEPLOYMENT: Deploys resources for Terraform Remote S3 Backend'
+
+Parameters:
+  ProjectName:
+    Type: String
+    Description: The name/purpose of the deployment - lowercase only
+    AllowedPattern: ^[a-z]*$
+
+Resources:
+  #-----------------------------------------------------------------------------------------------------------------------------
+  # Terraform S3 Backend and state locking configuration
+  # https://www.terraform.io/language/settings/backends/s3
+  #-----------------------------------------------------------------------------------------------------------------------------
+  # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html
+  TerraformS3BackendBucket:
+    Type: AWS::S3::Bucket
+    DeletionPolicy: Delete
+    Properties:
+      AccessControl: BucketOwnerFullControl
+      BucketEncryption:
+        ServerSideEncryptionConfiguration:
+          - ServerSideEncryptionByDefault:
+              SSEAlgorithm: AES256
+      BucketName: !Sub ${ProjectName}-${AWS::AccountId}-terraform-s3-backend
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: true
+        BlockPublicPolicy: true
+        IgnorePublicAcls: true
+        RestrictPublicBuckets: true
+      Tags:
+        - Key: ProjectName
+          Value: !Ref ProjectName
+        - Key: StackName
+          Value: !Ref AWS::StackName
+      VersioningConfiguration:
+        Status: Enabled
+
+
+  # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-dynamodb-table.html
+  # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-dynamodb-provisionedthroughput.html
+  DDBStateLockingTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      AttributeDefinitions:
+        - AttributeName: 'LockID'
+          AttributeType: 'S'
+      BillingMode: PAY_PER_REQUEST
+      KeySchema:
+        - AttributeName: 'LockID'
+          KeyType: 'HASH'
+      TableClass: STANDARD_INFREQUENT_ACCESS
+      Tags:
+        - Key: ProjectName
+          Value: !Ref ProjectName
+        - Key: StackName
+          Value: !Ref AWS::StackName
+
+Outputs:
+  TerraformS3BackendBucketName:
+    Value: !Ref TerraformS3BackendBucket
+    Description: Name of the TerraformS3BackendBucket Amazon S3 bucket
+    Export:
+      Name: !Sub 'TerraformS3BackendBucket-${ProjectName}'
+
+  DDBStateLockingTableName:
+    Value: !Ref DDBStateLockingTable
+    Description: Name of the DDBStateLockingTable Table Name
+    Export:
+      Name: !Sub 'DDBStateLockingTable-${ProjectName}'

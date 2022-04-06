@@ -6,6 +6,12 @@ terraform {
       source = "hashicorp/aws"
     }
   }
+  backend "s3" {
+    bucket         = "demo-514215195183-terraform-s3-backend"
+    key            = "tf-lab.tfstate"
+    region         = "us-east-1"
+    dynamodb_table = "demo-stack-DDBStateLockingTable-6JAORL4JJ41Q"
+  }
 }
 
 
