@@ -6,7 +6,7 @@ The module introduced is named `core` and contains configuration for resources t
 
 You will need to create a file named `terraform.tfvars` in your `terraform` directory.
 
-You also need to create a key pair for your EC2 instances. See the README.md in they `keys` directory for instructions.
+You also need to create a key pair for your EC2 instances. See the `README.md` in the `keys` directory for instructions.
 
 # Sample terraform.tfvars
 
