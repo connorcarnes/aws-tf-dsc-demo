@@ -153,3 +153,56 @@ C:\code\aws-tf-dsc-demo\terraform> terraform console
 > exit
  C:\code\aws-tf-dsc-demo\terraform>
 ```
+
+# Destroy
+
+## [terraform destroy](https://www.terraform.io/cli/commands/destroy)
+
+```
+C:\code\aws-tf-dsc-demo\terraform>
+ [demo-00]terraform destroy
+aws_vpc.this: Refreshing state... [id=vpc-0063f3c627a9faab2]
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
+  - destroy
+
+Terraform will perform the following actions:
+
+  # aws_vpc.this will be destroyed
+  - resource "aws_vpc" "this" {
+      - arn                              = "arn:aws:ec2:us-east-1:514215195183:vpc/vpc-0063f3c627a9faab2" -> null
+      - assign_generated_ipv6_cidr_block = false -> null
+      - cidr_block                       = "10.0.0.0/16" -> null
+      - default_network_acl_id           = "acl-06de7d50f223109c2" -> null
+      - default_route_table_id           = "rtb-0c5efe094b1307a8e" -> null
+      - default_security_group_id        = "sg-05c9bc53d0143253f" -> null
+      - dhcp_options_id                  = "dopt-0385a20739dc4fa23" -> null
+      - enable_classiclink               = false -> null
+      - enable_classiclink_dns_support   = false -> null
+      - enable_dns_hostnames             = true -> null
+      - enable_dns_support               = true -> null
+      - id                               = "vpc-0063f3c627a9faab2" -> null
+      - instance_tenancy                 = "default" -> null
+      - ipv6_netmask_length              = 0 -> null
+      - main_route_table_id              = "rtb-0c5efe094b1307a8e" -> null
+      - owner_id                         = "514215195183" -> null
+      - tags                             = {
+          - "Name" = "my_vpc"
+        } -> null
+      - tags_all                         = {
+          - "Environment" = "tf-lab"
+          - "Name"        = "my_vpc"
+        } -> null
+    }
+
+Plan: 0 to add, 0 to change, 1 to destroy.
+
+Do you really want to destroy all resources?
+  Terraform will destroy all your managed infrastructure, as shown above.
+  There is no undo. Only 'yes' will be accepted to confirm.
+
+  Enter a value: yes
+
+aws_vpc.this: Destroying... [id=vpc-0063f3c627a9faab2]
+aws_vpc.this: Destruction complete after 1s
+```
