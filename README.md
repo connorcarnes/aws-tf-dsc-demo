@@ -2,6 +2,8 @@
 
 Contains simple Terraform config that uses a local backend and creates a VPC.
 
+Steps below assume you already have Terraform installed and configured to use with an AWS account.
+
 ## [Terraform Settings Block](https://www.terraform.io/language/settings#terraform-settings)
 
 ## [Provider Block](https://www.terraform.io/language/providers)
