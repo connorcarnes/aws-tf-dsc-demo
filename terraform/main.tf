@@ -15,8 +15,8 @@ provider "aws" {
   region = "us-east-1"
   default_tags {
     tags = {
-      Environment = "tf-lab"
-      Name        = "tf-lab"
+      Environment = "aws-tf-dsc-demo"
+      Name        = "aws-tf-dsc-demo"
     }
   }
 }
