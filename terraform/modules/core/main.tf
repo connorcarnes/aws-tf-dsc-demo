@@ -47,7 +47,7 @@ resource "aws_s3_bucket_versioning" "this" {
 resource "aws_s3_object" "this" {
   for_each = fileset(path.root, "${var.mof_directory}/*.mof")
   bucket = var.dsc_bucket_name
-  key    = "dsc"
+  key    = each.value
   source = each.value
   etag   = filemd5(each.value)
   depends_on = [
@@ -89,7 +89,7 @@ resource "aws_subnet" "public" {
   }
 }
 resource "aws_vpc_dhcp_options" "this" {
-  domain_name          = "first.local"
+  domain_name          = "corp.local"
   domain_name_servers  = flatten([var.pdc_ip, var.dns_ips])
   ntp_servers          = [var.pdc_ip]
   netbios_name_servers = [var.pdc_ip]

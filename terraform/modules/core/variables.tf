@@ -1,3 +1,4 @@
+# https://www.terraform.io/language/values/variables
 variable "project_name" {
   default = ""
   description = "Prefix for all resources"

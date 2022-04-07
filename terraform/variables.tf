@@ -62,3 +62,10 @@ variable "ec2_data" {
   }))
   default = {}
 }
+#-------------------------------------------------------------------------
+# Config Module Variables
+#-------------------------------------------------------------------------
+variable "ssm_parameters" {
+  default     = {}
+  description = "Parameters to pass to the SSM Parameter Store"
+}
