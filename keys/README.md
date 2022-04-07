@@ -11,6 +11,6 @@ Create the keys on your machine and add them to this folder. The `.gitignore` pr
 
 * [Terraform Docs - aws_key_pair resource](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/key_pair)
 * [How to Generate SSH Key in Windows 10](https://phoenixnap.com/kb/generate-ssh-key-windows-10)
-* This project also creates SSM associations, so you will have command line access to your instances through the Session Manager in the SSM console (except on domain controllers).
+* This project also creates SSM associations, so you will also have command line access to your instances through the Session Manager in the SSM console (except on domain controllers).
 * Amazon EC2 supports 2048-bit SSH-2 RSA keys for Windows instances.
 * Ensure the `.pem` and `.pub` file extensions are present, add them manually if needed.
