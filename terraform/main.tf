@@ -7,10 +7,10 @@ terraform {
     }
   }
   backend "s3" {
-    bucket         = "demo-514215195183-terraform-s3-backend"
+    bucket         = "demostack-514215195183-terraform-s3-backend"
     key            = "tf-lab.tfstate"
     region         = "us-east-1"
-    dynamodb_table = "demo-stack-DDBStateLockingTable-6JAORL4JJ41Q"
+    dynamodb_table = "demo-stack-DDBStateLockingTable-18DAW4WRCSZVT"
   }
 }
 
@@ -21,8 +21,8 @@ provider "aws" {
   region = "us-east-1"
   default_tags {
     tags = {
-      Environment = "tf-lab"
-      Name        = "tf-lab"
+      Environment = "aws-tf-dsc-demo"
+      Name        = "aws-tf-dsc-demo"
     }
   }
 }
