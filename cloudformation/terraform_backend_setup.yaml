@@ -37,49 +37,6 @@ Resources:
       VersioningConfiguration:
         Status: Enabled
 
-  # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-policy.html
-  TerraformS3BackendBucketPolicy:
-    Type: 'AWS::S3::BucketPolicy'
-    Properties:
-      Bucket: !Ref TerraformS3BackendBucket
-      PolicyDocument:
-        Version: '2012-10-17'
-        Statement:
-          - Action:
-              - 's3:*'
-            Effect: Allow
-            Principal:
-              AWS:
-                - !Sub 'arn:aws:iam::${AWS::AccountId}:root'
-            Resource:
-              - !Sub 'arn:aws:s3:::${TerraformS3BackendBucket}'
-              - !Sub 'arn:aws:s3:::${TerraformS3BackendBucket}/*'
-          - Sid: DenyUnEncryptedObjectUploads
-            Effect: Deny
-            Principal: '*'
-            Action: 's3:PutObject'
-            Resource: !Join
-              - ''
-              - - !GetAtt
-                  - TerraformS3BackendBucket
-                  - Arn
-                - /*
-            Condition:
-              StringNotEquals:
-                's3:x-amz-server-side-encryption': 'aws:kms'
-          - Sid: DenyInsecureConnections
-            Effect: Deny
-            Principal: '*'
-            Action: 's3:*'
-            Resource: !Join
-              - ''
-              - - !GetAtt
-                  - TerraformS3BackendBucket
-                  - Arn
-                - /*
-            Condition:
-              Bool:
-                'aws:SecureTransport': false
 
   # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-dynamodb-table.html
   # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-dynamodb-provisionedthroughput.html
