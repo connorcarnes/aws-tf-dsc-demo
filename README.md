@@ -1,26 +1,18 @@
 # Overview
 
-Builds on branch demo-02. Introduces a second module, and how to pass output from one module as input to another module.
+Builds on branch demo-03. Introduces a third module, config.
 
 # Addition to terraform.tfvars
 
 ```
-ec2_data = {
-  dc00 = {
-    associate_public_ip_address = true
-    instance_type               = "t2.small"
-    private_ip                  = "10.0.1.10"
-    az                          = "us-east-1a"
-    data_disk_size              = 0
-  },
-  app00 = {
-    associate_public_ip_address = true
-    instance_type               = "t2.small"
-    private_ip                  = "10.0.1.20"
-    az                          = "us-east-1a"
-    data_disk_size              = 1
-  }
+ssm_parameters = {
+  admin          = "examplepW@3"
+  first-admin    = "examplepW@3"
+  "regular.user" = "examplepW@3"
 }
 ```
 
-# [Output Values](https://www.terraform.io/language/values/outputs)
+# [DSC - Write, Compile and Apply a Configuration](https://docs.microsoft.com/en-us/powershell/dsc/configurations/write-compile-apply-configuration?view=dsc-1.1)
+# [DSC - ConfigurationData Parameter](https://docs.microsoft.com/en-us/powershell/dsc/configurations/configdata?view=dsc-1.1)
+
+# [AWS Systems Manager State Manager - ApplyDSCMofs](https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-state-manager-using-mof-file.html)
