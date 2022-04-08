@@ -4,6 +4,15 @@ Contains simple Terraform config that uses a local backend and creates a VPC.
 
 Steps below assume you already have Terraform installed and configured to use with an AWS account.
 
+## terraform.tfvars
+
+You will need to create a terraform.tfvars file in the terraform directory. To start we'll only be defining two variables:
+
+```
+project_name    = "aws-tf-dsc-demo"
+aws_region      = "us-east-1"
+```
+
 ## [Terraform Settings Block](https://www.terraform.io/language/settings#terraform-settings)
 
 ## [Provider Block](https://www.terraform.io/language/providers)
