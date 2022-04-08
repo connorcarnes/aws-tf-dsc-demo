@@ -7,10 +7,10 @@ terraform {
     }
   }
   backend "s3" {
-    bucket         = "demostack-514215195183-terraform-s3-backend"
+    bucket         = "YOUR_BUCKET"
     key            = "tf-lab.tfstate"
-    region         = "us-east-1"
-    dynamodb_table = "demo-stack-DDBStateLockingTable-18DAW4WRCSZVT"
+    region         = "YOUR_REGION"
+    dynamodb_table = "YOUR_DDB"
   }
 }
 
@@ -18,14 +18,15 @@ terraform {
 # Provider Settings
 # https://www.terraform.io/language/providers
 provider "aws" {
-  region = "us-east-1"
+  region = var.aws_region
   default_tags {
     tags = {
-      Environment = "aws-tf-dsc-demo"
-      Name        = "aws-tf-dsc-demo"
+      Environment = var.project_name
+      Name        = var.project_name
     }
   }
 }
+
 
 # Resources
 resource "aws_vpc" "this" {
