@@ -1,6 +1,8 @@
 # Miscellaneous local files
 misc
 debug.log
+# MOFs
+*.mof
 # Key/Cert files
 *.pem
 *.pub

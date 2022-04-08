@@ -11,7 +11,6 @@ configuration CorpDomain {
     )
 
     # These should be installed on the machine you're compiling the MOFs on
-    Import-DscResource -ModuleName PSDesiredStateConfiguration
     Import-DscResource -ModuleName ActiveDirectoryDsc
     Import-DscResource -ModuleName NetworkingDsc
     Import-DscResource -ModuleName ComputerManagementDsc
@@ -57,13 +56,13 @@ configuration CorpDomain {
             DependsOn        = "[User]AdminUser"
         }
         ADDomain CreateDC {
-            DomainName                    = $ConfigurationData.CorpDomain.name
+            DomainName                    = "corp.local"
             Credential                    = $DomainCred
             SafemodeAdministratorPassword = $SafeModeAdminstratorCred
             DependsOn                     = "[WindowsFeature]ADDSInstall"
         }
         WaitForADDomain WaitFirstDomain {
-            DomainName = $ConfigurationData.CorpDomain.name
+            DomainName = "corp.local"
             DependsOn  = "[ADDomain]CreateDC"
         }
         #DnsServerAddress DnsServerAddress {
@@ -77,7 +76,7 @@ configuration CorpDomain {
             Ensure     = 'Present'
             UserName   = 'regular.user'
             Password   = (New-Object System.Management.Automation.PSCredential("regular.user", (ConvertTo-SecureString "this_gets_ignored" -AsPlainText -Force)))
-            DomainName = 'first.local'
+            DomainName = 'corp.local'
             Path       = 'CN=Users,DC=first,DC=local'
             DependsOn  = "[WaitForADDomain]waitFirstDomain"
         }
@@ -91,14 +90,14 @@ configuration CorpDomain {
         #    DependsOn      = "[WaitForADDomain]waitFirstDomain"
         #}
         WaitForADDomain WaitForADDomain {
-            DomainName              = $ConfigurationData.CorpDomain.name
+            DomainName              = "corp.local"
             Credential              = $DomainCred
             WaitForValidCredentials = $true
             RestartCount            = 5
         }
         Computer app00 {
             Name       = 'app00'
-            DomainName = $ConfigurationData.CorpDomain.name
+            DomainName = "corp.local"
             Credential = $DomainCred
             Server     = 'dc00'
             DependsOn  = "[WaitForADDomain]WaitForADDomain"
