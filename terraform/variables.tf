@@ -3,6 +3,10 @@ variable "project_name" {
   default = ""
   description = "Prefix for all resources"
 }
+variable "aws_region" {
+  default = ""
+  description = "AWS Region"
+}
 #-------------------------------------------------------------------------
 # Core Module Variables
 #-------------------------------------------------------------------------

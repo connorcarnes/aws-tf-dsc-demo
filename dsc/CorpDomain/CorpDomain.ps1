@@ -11,7 +11,6 @@ configuration CorpDomain {
     )
 
     # These should be installed on the machine you're compiling the MOFs on
-    Import-DscResource -ModuleName PSDesiredStateConfiguration
     Import-DscResource -ModuleName ActiveDirectoryDsc
     Import-DscResource -ModuleName NetworkingDsc
     Import-DscResource -ModuleName ComputerManagementDsc
