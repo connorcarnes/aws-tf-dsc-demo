@@ -12,14 +12,15 @@ terraform {
 # Provider Settings
 # https://www.terraform.io/language/providers
 provider "aws" {
-  region = "us-east-1"
+  region = var.aws_region
   default_tags {
     tags = {
-      Environment = "aws-tf-dsc-demo"
-      Name        = "aws-tf-dsc-demo"
+      Environment = var.project_name
+      Name        = var.project_name
     }
   }
 }
+
 
 # Resources
 resource "aws_vpc" "this" {
