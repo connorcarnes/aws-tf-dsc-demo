@@ -58,10 +58,8 @@ configuration CorpDomain {
         }
         ADDomain CreateDC {
             DomainName                    = $ConfigurationData.CorpDomain.name
-            Credential                    = $domainCred
-            SafemodeAdministratorPassword = $safemodeAdministratorCred
-            DatabasePath                  = 'C:\NTDS'
-            LogPath                       = 'C:\NTDS'
+            Credential                    = $DomainCred
+            SafemodeAdministratorPassword = $SafeModeAdminstratorCred
             DependsOn                     = "[WindowsFeature]ADDSInstall"
         }
         WaitForADDomain WaitFirstDomain {
@@ -94,14 +92,14 @@ configuration CorpDomain {
         #}
         WaitForADDomain WaitForADDomain {
             DomainName              = $ConfigurationData.CorpDomain.name
-            Credential              = $domainCred
+            Credential              = $DomainCred
             WaitForValidCredentials = $true
             RestartCount            = 5
         }
         Computer app00 {
             Name       = 'app00'
             DomainName = $ConfigurationData.CorpDomain.name
-            Credential = $domainCred
+            Credential = $DomainCred
             Server     = 'dc00'
             DependsOn  = "[WaitForADDomain]WaitForADDomain"
         }
