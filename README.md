@@ -8,17 +8,16 @@ You will need to create a file named `terraform.tfvars` in your `terraform` dire
 
 You also need to create a key pair for your EC2 instances. See the `README.md` in the `keys` directory for instructions.
 
-# Sample terraform.tfvars
+# terraform.tfvars addition
 
 ```
-project_name    = "example-project"
 dsc_bucket_name = "my-bucket-name"
 key_path        = ""../keys/yourkey.pub"
 vpc_cidr        = "10.0.0.0/16"
 subnets         = ["10.0.1.0/24", "10.0.2.0/24"]
 pdc_ip          = "10.0.1.10"
 dns_ips         = ["1.1.1.1", "8.8.8.8"]
-management_ips  = ["your-ip-here"] # If you want to RDP to your instances from your workstation
+management_ips  = ["your-ip-here"]
 ```
 
 # [Standard Module Structure](https://www.terraform.io/language/modules/develop/structure)
